@@ -85,13 +85,24 @@ int Heap<T>::findElementPosition(T element)
 }
 
 template <typename T>
-int Heap<T>::deleteElement(T value)
+int Heap<T>::deleteElement(T value) //FIX THIS !S
 {
     int elementPosition = findElementPosition(value);
 
     if (elementPosition != -1)
     {
-        //TODO !
+        T parent = (elementPosition - 1) / 2;
+
+        heap[elementPosition] = heap[numberOfElementsInHeap - 1];
+
+        numberOfElementsInHeap -= 1;
+
+        if (elementPosition == 0 || heap[parent] > heap[elementPosition])
+            heapifyDown(elementPosition);
+        else
+            heapifyUp(elementPosition);
+
+        return 0;
     }
     else
         return -1;
@@ -133,10 +144,84 @@ void Heap<T>::initializePrintVariables()
 }
 
 template <typename T>
-void Heap<T>::heapifyUp(int position)
+void Heap<T>::heapifyUp(int position) //CHECK IF WORKS
 {
+    while (position != 0)
+    {
+        T newElem = heap[position];
+        int parentPos = ((position - 1) / 2);
+        T parent = heap[parentPos];
+        T temp;
+
+        if (parent < newElem)
+        {
+            temp = heap[position];
+            heap[position] = parent;
+            heap[parentPos] = newElem;
+
+            position = parentPos;
+        }
+        else
+        {
+            break;
+        }
+    }
 }
+
 template <typename T>
-void Heap<T>::heapifyDown(int position)
+void Heap<T>::heapifyDown(int position) //CHECK IF WORKS
 {
+    while ((2 * position + 1) < numberOfElementsInHeap)
+    {
+        int leftPos = 2 * position + 1;
+        int rightPos = 2 * position + 2;
+        T element = heap[position];
+        T temp;
+
+        if (rightPos >= numberOfElementsInHeap)
+        {
+            T left = heap[leftPos];
+
+            if (left > element)
+            {
+                temp = heap[leftPos];
+                heap[leftPos] = element;
+                heap[position] = temp;
+
+                position = leftPos;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            int left = heap[leftPos];
+            int right = heap[rightPos];
+            if (left > element || right > element)
+            {
+                if (left >= right)
+                {
+                    temp = heap[leftPos];
+                    heap[leftPos] = element;
+                    heap[position] = temp;
+
+                    position = leftPos;
+                }
+                else
+                {
+                    temp = heap[rightPos];
+                    heap[rightPos] = element;
+                    heap[position] = temp;
+
+                    position = rightPos;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 }
