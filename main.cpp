@@ -222,7 +222,7 @@ void displayMenuHeap(mt19937 generator, Heap<int> *heap)
             else
             {
                 cout << "Dane zostały wczytane\n\n";
-                heap->display();
+                heap->display("", "", 0);
             }
             break;
         }
@@ -233,20 +233,20 @@ void displayMenuHeap(mt19937 generator, Heap<int> *heap)
             if (resultOfOperation == -1)
                 cout << "Podana wartość nie występuje w kopcu !" << endl;
             else
-                heap->display();
+                heap->display("", "", 0);
             break;
         case 3: // add element
             cout << "Podaj wartość elementu, który należy dodać:";
             cin >> elementValue;
             heap->addElement(elementValue);
-            heap->display();
+            heap->display("", "", 0);
             break;
         case 4: //search heap for given element
         {
             cout << "Podaj wartość elementu, który należy wyszukać:";
             cin >> elementValue;
-            bool isPresent = heap->isElementInHeap(elementValue);
-            if (isPresent)
+            int elemPosition = heap->findElementPosition(elementValue);
+            if (elemPosition != -1)
                 cout << "Element znajduje się w kopcu." << endl;
             else
                 cout << "Podany element nie występuje w kopcu." << endl;
@@ -257,10 +257,10 @@ void displayMenuHeap(mt19937 generator, Heap<int> *heap)
             int size;
             cin >> size;
             heap->generateHeap(size);
-            heap->display();
+            heap->display("", "", 0);
             break;
         case 6: //display the heap
-            heap->display();
+            heap->display("", "", 0);
             break;
         case 7: //funckja służąca do testowania.
             break;
