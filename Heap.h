@@ -17,7 +17,6 @@ public:
   int findElementPosition(T element);
   int deleteElement(T value);
   void display(string sp, string sn, int v);
-  void initializePrintVariables();
   void heapifyDown(int position);
   void heapifyUp(int position);
 
@@ -27,6 +26,7 @@ private:
   int size;
   int numberOfElementsInHeap;
   //variables to print pretty the heap
+  void initializePrintVariables();
   string cr, cl, cp;
 };
 
