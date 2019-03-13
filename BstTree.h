@@ -33,9 +33,6 @@ class BstTree
 	void deleteTree(BstNode<T> *root);
 	BstNode<T> *findSuccessor(BstNode<T> *node);
 	BstNode<T> *minimalNode();
-	//variables to print pretty the tree
-	void initializePrintVariables();
-	void displayRecurrence(string sp, string sn, BstNode<T> *&v);
-	string cr, cl, cp;
+	void displayRecurrence(BstNode<T> *tp, string prefix);
 };
 #endif

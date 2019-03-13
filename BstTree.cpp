@@ -42,18 +42,6 @@ void BstTree<T>::generateTree(int size, T minValue, T maxValue)
 }
 
 template <typename T>
-void BstTree<T>::initializePrintVariables()
-{
-	cr = cl = cp = "  ";
-	cr[0] = ' ';
-	cr[1] = ' ';
-	cl[0] = ' ';
-	cl[1] = ' ';
-	cp[1] = ' ';
-	cp[0] = ' ';
-}
-
-template <typename T>
 int BstTree<T>::loadFromFile(string filename)
 {
 	ifstream stream(filename);
@@ -206,27 +194,41 @@ int BstTree<T>::deleteElement(T value)
 template <typename T>
 void BstTree<T>::display()
 {
-	displayRecurrence("", "", root);
+	if (root == NULL)
+		return;
+
+	cout << root->key << endl;
+	displayRecurrence(root, "");
+	cout << endl;
 }
 
 template <typename T>
-void BstTree<T>::displayRecurrence(string sMiddle, string sBefore, BstNode<T> *&currNode)
+void BstTree<T>::displayRecurrence(BstNode<T> *root, string prefix)
 {
-	string s;
-	if (currNode != nullptr)
+	if (root == NULL)
+		return;
+
+	bool hasLeft = (root->left != NULL);
+	bool hasRight = (root->right != NULL);
+
+	if (!hasLeft && !hasRight)
+		return;
+
+	cout << prefix;
+	cout << ((hasLeft && hasRight) ? "├── " : "");
+	cout << ((!hasLeft && hasRight) ? "└── " : "");
+
+	if (hasRight)
 	{
-		s = sMiddle;
-		if (sBefore == (string(1, (char)47) + string(1, (char)126)))
-			s[s.length() - 2] = ' ';
-		displayRecurrence(s + (char)124 + " ", (string(1, (char)47)) + string(1, (char)126), currNode->right);
+		bool printStrand = (hasLeft && hasRight && (root->right->right != NULL || root->right->left != NULL));
+		string newPrefix = prefix + (printStrand ? "│   " : "    ");
+		cout << root->right->key << endl;
+		displayRecurrence(root->right, newPrefix);
+	}
 
-		s = s.substr(0, sMiddle.length() - 2);
-
-		cout << s << sBefore << currNode->key << endl;
-
-		s = sMiddle;
-		if (sBefore == (string(1, (char)92)) + string(1, (char)126))
-			s[s.length() - 2] = ' ';
-		displayRecurrence(s + (char)124 + " ", (string(1, (char)92)) + string(1, (char)126), currNode->left);
+	if (hasLeft)
+	{
+		cout << (hasRight ? prefix : "") << "└── " << root->left->key << endl;
+		displayRecurrence(root->left, prefix + "    ");
 	}
 }
