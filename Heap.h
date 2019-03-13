@@ -16,7 +16,8 @@ public:
   void generateHeap(int size, T minValue = 1, T maxValue = 1000);
   int findElementPosition(T element);
   int deleteElement(T value);
-  void display(string sp, string sn, int v);
+  void displayRecurrence(string sMiddle, string sBefore, int currNode);
+  void display();
   void heapifyDown(int position);
   void heapifyUp(int position);
 
@@ -25,9 +26,6 @@ private:
   T *heap;
   int size;
   int numberOfElementsInHeap;
-  //variables to print pretty the heap
-  void initializePrintVariables();
-  string cr, cl, cp;
 };
 
 #endif

@@ -220,7 +220,7 @@ void displayMenuHeap(Heap<int> *heap)
             else
             {
                 cout << "Dane zostały wczytane\n\n";
-                heap->display("", "", 0);
+                heap->display();
             }
             break;
         }
@@ -231,13 +231,13 @@ void displayMenuHeap(Heap<int> *heap)
             if (resultOfOperation == -1)
                 cout << "Podana wartość nie występuje w kopcu !" << endl;
             else
-                heap->display("", "", 0);
+                heap->display();
             break;
         case 3: // add element
             cout << "Podaj wartość elementu, który należy dodać:";
             cin >> elementValue;
             heap->addElement(elementValue);
-            heap->display("", "", 0);
+            heap->display();
             break;
         case 4: //search heap for given element
         {
@@ -251,14 +251,14 @@ void displayMenuHeap(Heap<int> *heap)
             break;
         }
         case 5: // generate random values and fill the heap
-            cout << "Podaj rozmiar kopca:";
+            cout << "Podaj ilość elementów do wygenerowania:";
             int size;
             cin >> size;
             heap->generateHeap(size);
-            heap->display("", "", 0);
+            heap->display();
             break;
         case 6: //display the heap
-            heap->display("", "", 0);
+            heap->display();
             break;
         case 7: //funckja służąca do testowania.
             break;

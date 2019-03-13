@@ -13,7 +13,6 @@ Heap<T>::Heap(mt19937 generator, int size) : generator(generator), size(size)
 {
     heap = new T[size];         //allocate new array with default size of 15
     numberOfElementsInHeap = 0; // when creating the heap there are no elements in it
-    initializePrintVariables();
 }
 
 template <typename T>
@@ -111,38 +110,31 @@ int Heap<T>::deleteElement(T value)
 }
 
 template <typename T>
-void Heap<T>::display(string sp, string sn, int v)
+void Heap<T>::displayRecurrence(string sMiddle, string sBefore, int currNode)
 {
     string s;
-    cout << endl;
-    if (v < numberOfElementsInHeap)
+    if (currNode < size)
     {
-        s = sp;
-        if (sn == cr)
+        s = sMiddle;
+        if (sBefore == (string(1, (char)47) + string(1, (char)126)))
             s[s.length() - 2] = ' ';
-        display(s + cp, cr, 2 * v + 2);
+        displayRecurrence(s + (char)124 + " ", (string(1, (char)47)) + string(1, (char)126), 2 * currNode + 2);
 
-        s = s.substr(0, sp.length() - 2);
+        s = s.substr(0, sMiddle.length() - 2);
 
-        cout << s << sn << heap[v] << endl;
+        cout << s << sBefore << heap[currNode] << endl;
 
-        s = sp;
-        if (sn == cl)
+        s = sMiddle;
+        if (sBefore == (string(1, (char)92)) + string(1, (char)126))
             s[s.length() - 2] = ' ';
-        display(s + cp, cl, 2 * v + 1);
+        displayRecurrence(s + (char)124 + " ", (string(1, (char)92)) + string(1, (char)126), 2 * currNode + 1);
     }
 }
 
 template <typename T>
-void Heap<T>::initializePrintVariables()
+void Heap<T>::display()
 {
-    cr = cl = cp = "  ";
-    cr[0] = ' ';
-    cr[1] = ' ';
-    cl[0] = ' ';
-    cl[1] = ' ';
-    cp[1] = ' ';
-    cp[0] = ' ';
+    displayRecurrence("", "", 0);
 }
 
 template <typename T>
