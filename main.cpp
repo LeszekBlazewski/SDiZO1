@@ -18,7 +18,14 @@ void displayMenuStructure(string info)
     cout << "4.Znajdź" << endl;
     cout << "5.Utworz losowo" << endl;
     cout << "6.Wyświetl" << endl;
-    cout << "7.Test (pomiary)" << endl;
+    if (info == "---- DRZEWO BST ----")
+    {
+        cout << "7.Równoważenie drzewa BST (DSW)" << endl;
+        cout << "8.Test (pomiary)" << endl;
+    }
+    else
+        cout << "7.Test (pomiary)" << endl;
+
     cout << "0.Powrot do menu" << endl;
     cout << "Podaj opcje:";
 }
@@ -326,7 +333,11 @@ void displayMenuTree(BstTree<int> *tree)
         case 6: //display the tree
             tree->display();
             break;
-        case 7: //funckja służąca do testowania.
+        case 7: //DSW algorithm to rebalance the tree
+            tree->rebalanceDSW();
+            tree->display();
+            break;
+        case 8: // test function
             break;
         }
     } while (userInput != 0);
@@ -371,6 +382,8 @@ int main()
         delete list;
     if (heap)
         delete heap;
+    if (tree)
+        delete tree;
 
     return 0;
 }

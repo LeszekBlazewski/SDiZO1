@@ -26,6 +26,7 @@ class BstTree
 	BstNode<T> *findNode(T element);
 	void display();
 	void addElement(T value);
+	void rebalanceDSW();
 
   private:
 	mt19937 generator;
@@ -33,6 +34,9 @@ class BstTree
 	void deleteTree(BstNode<T> *root);
 	BstNode<T> *findSuccessor(BstNode<T> *node);
 	BstNode<T> *minimalNode();
+	void rotateRight(BstNode<T> *node);
+	void rotateLeft(BstNode<T> *node);
 	void displayRecurrence(BstNode<T> *tp, string prefix);
+	unsigned calculateLog2(unsigned number);
 };
 #endif

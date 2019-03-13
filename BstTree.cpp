@@ -232,3 +232,115 @@ void BstTree<T>::displayRecurrence(BstNode<T> *root, string prefix)
 		displayRecurrence(root->left, prefix + "    ");
 	}
 }
+
+template <typename T>
+void BstTree<T>::rotateLeft(BstNode<T> *node)
+{
+	BstNode<T> *rightChild = node->right;
+	BstNode<T> *parent = node->up;
+
+	if (rightChild) // check if right child exists (if not we can't rotate)
+	{
+		node->right = rightChild->left; // right child left son becomes current node right son
+		if (node->right)				// if the new assigned node is not nullptr ( it exists)
+			node->right->up = node;		// new son must point now to the node which we are rotating
+
+		rightChild->left = node; // child is moved up so new node becomes left son of the moved node
+		rightChild->up = parent; // now the right child needs to point where previously node has pointed
+		node->up = rightChild;   // right child is parent of the rotated node so assign up pointer to it
+
+		if (parent) // check if the parent of previous up node exists
+		{
+			if (parent->left == node)	  // check if left son of parent of previous up node is the rotated node
+				parent->left = rightChild; // left child of parent of previous up node becomes the right child of rotated node
+			else
+				parent->right = rightChild; // othewise it becomes the right son
+		}
+		else
+			root = rightChild; // if parent does not exists the rotation reached the root so rotated node becomes new root
+	}
+}
+
+template <typename T>
+void BstTree<T>::rotateRight(BstNode<T> *node)
+{
+	BstNode<T> *leftChild = node->left; // get left child of node which will be rotated
+	BstNode<T> *parent = node->up;		// get the parent of the node
+
+	if (leftChild) // check if left child exists
+	{
+		node->left = leftChild->right; // now left child right son becomes current node left son
+		if (node->left)				   // if the new assigned node is not nullptr ( it exists)
+			node->left->up = node;	 // point the new son to the parent
+
+		leftChild->right = node; // child is moved up so new node becomes right son of the moved node
+		leftChild->up = parent;  // now the left child needs to point where previously node has pointed
+		node->up = leftChild;	// left child is parent of the rotated node so assign up pointer to it
+
+		if (parent) // check if the parent of previous up node exists
+		{
+			if (parent->left == node)	 // check if left son of parent of previous up node is the rotated node
+				parent->left = leftChild; // left child of parent of previous up node becomes the  left child of rotated node
+			else
+				parent->right = leftChild; // othewise it becomes the right son
+		}
+		else
+			root = leftChild; // if parent does not exists the rotation reached the root so rotated node becomes new root
+	}
+}
+
+template <typename T>
+unsigned BstTree<T>::calculateLog2(unsigned number)
+{
+	// quickly calculates the logarithm using shifting
+	unsigned result = 1;
+
+	while ((number = number >> 1) > 0)
+		result = result << 1;
+
+	return result;
+}
+
+template <typename T>
+void BstTree<T>::rebalanceDSW()
+{
+	unsigned nodesNumber, rotateCounter;
+	BstNode<T> *p;
+
+	nodesNumber = 0; // initialize nodeCounter
+	p = root;		 // start from the root
+	while (p)		 // until we are inside the tree
+		if (p->left) // if current processed not has left son
+		{
+			rotateRight(p); // rotate the tree right
+			p = p->up;		// move to the parent
+		}
+		else
+		{
+			nodesNumber++; // Otherwise increate the number of nodes
+			p = p->right;  // and move to the right son
+		}
+
+	// Teraz z listy tworzymy drzewo BST
+	rotateCounter = nodesNumber + 1 - calculateLog2(nodesNumber + 1); // Wyznaczamy początkową liczbę obrotów
+
+	p = root; // Start from the root
+	for (int i = 0; i < rotateCounter; i++)
+	{
+		rotateLeft(p);	// every second node is rotated left
+		p = p->up->right; // move to the right son of parrent of current node
+	}
+
+	nodesNumber = nodesNumber - rotateCounter; // Decrease the number of nodes by number of leafs
+
+	while (nodesNumber > 1) // keep rotating th tree
+	{
+		nodesNumber = nodesNumber >> 1; // with each iteration the number of nodes decreases by 2
+		p = root;						// start from the root
+		for (int i = 0; i < nodesNumber; i++)
+		{
+			rotateLeft(p);	// every second node gets rotated
+			p = p->up->right; // move the second next node
+		}
+	}
+}
