@@ -30,37 +30,14 @@ void BstTree<T>::deleteTree(BstNode<T> *root)
 }
 
 template <typename T>
-void BstTree<T>::generateTree(int size, T minValue = 1, T maxValue = 1000)
+void BstTree<T>::generateTree(int size, T minValue, T maxValue)
 {
 	uniform_int_distribution<> dist(minValue, maxValue);
-	removeTree(root);
+	deleteTree(root);
 	root = nullptr;
 	for (int i = 0; i < size; i++)
 	{
 		addElement(dist(generator));
-	}
-}
-
-template <typename T>
-void BstTree<T>::display(string sp, string sn, int v)
-{
-	string s;
-	cout << endl;
-	if (v < numberOfElementsInHeap)
-	{
-		s = sp;
-		if (sn == cr)
-			s[s.length() - 2] = ' ';
-		display(s + cp, cr, 2 * v + 2);
-
-		s = s.substr(0, sp.length() - 2);
-
-		cout << s << sn << heap[v] << endl;
-
-		s = sp;
-		if (sn == cl)
-			s[s.length() - 2] = ' ';
-		display(s + cp, cl, 2 * v + 1);
 	}
 }
 
@@ -79,8 +56,8 @@ void BstTree<T>::initializePrintVariables()
 template <typename T>
 int BstTree<T>::loadFromFile(string filename)
 {
-	ifstream stream(fileName);
-	if (!file.is_open())
+	ifstream stream(filename);
+	if (!stream.is_open())
 		return -1;
 
 	int length;
@@ -101,7 +78,7 @@ int BstTree<T>::loadFromFile(string filename)
 template <typename T>
 BstNode<T> *BstTree<T>::findNode(T element)
 {
-	BstNode *ptr = root;									 // tmp ptr to not mess up the tree
+	BstNode<T> *ptr = root;									 // tmp ptr to not mess up the tree
 	while (ptr != nullptr && ptr->key != element)			 // until ptr exists and key differs from searched element
 		ptr = (element < ptr->key) ? ptr->left : ptr->right; // if element is less than current node key move left otherwise move right
 
@@ -120,14 +97,14 @@ BstNode<T> *BstTree<T>::minimalNode()
 }
 
 template <typename T>
-void BstTree<T>::findSuccessor(BstNode<T> *node)
+BstNode<T> *BstTree<T>::findSuccessor(BstNode<T> *node)
 {
-	BSTNode<T> *successor; // successor of the node given in parameter
+	BstNode<T> *successor; // successor of the node given in parameter
 
 	if (node != nullptr) // if given node exists
 	{
-		if (node->right)				// if right son of the given node exists
-			return minBST(node->right); // search the minimal node
+		if (node->right)		  // if right son of the given node exists
+			return minimalNode(); // search the minimal node
 		else
 		{
 			successor = node->up;							// successors becomes the parent of the node
@@ -145,7 +122,7 @@ void BstTree<T>::findSuccessor(BstNode<T> *node)
 template <typename T>
 void BstTree<T>::addElement(T value)
 {
-	BstNode<T> *newNode = new BstNode;
+	BstNode<T> *newNode = new BstNode<T>;
 	newNode->left = newNode->right = nullptr;
 	newNode->key = value;
 
@@ -183,7 +160,7 @@ void BstTree<T>::addElement(T value)
 template <typename T>
 int BstTree<T>::deleteElement(T value)
 {
-	BSTNode<T> *Y, *Z;
+	BstNode<T> *Y, *Z;
 
 	// First search the node which contains the given value
 	BstNode<T> *nodeToDelete = findNode(value);
@@ -224,4 +201,32 @@ int BstTree<T>::deleteElement(T value)
 	}
 	else
 		return -1; // this means that value given to delete is not in tree
+}
+
+template <typename T>
+void BstTree<T>::display()
+{
+	displayRecurrence("", "", root);
+}
+
+template <typename T>
+void BstTree<T>::displayRecurrence(string sMiddle, string sBefore, BstNode<T> *&currNode)
+{
+	string s;
+	if (currNode != nullptr)
+	{
+		s = sMiddle;
+		if (sBefore == (string(1, (char)47) + string(1, (char)126)))
+			s[s.length() - 2] = ' ';
+		displayRecurrence(s + (char)124 + " ", (string(1, (char)47)) + string(1, (char)126), currNode->right);
+
+		s = s.substr(0, sMiddle.length() - 2);
+
+		cout << s << sBefore << currNode->key << endl;
+
+		s = sMiddle;
+		if (sBefore == (string(1, (char)92)) + string(1, (char)126))
+			s[s.length() - 2] = ' ';
+		displayRecurrence(s + (char)124 + " ", (string(1, (char)92)) + string(1, (char)126), currNode->left);
+	}
 }

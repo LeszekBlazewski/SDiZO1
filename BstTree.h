@@ -24,17 +24,18 @@ class BstTree
 	int loadFromFile(string filename);
 	void generateTree(int size, T minValue = 1, T maxValue = 1000);
 	BstNode<T> *findNode(T element);
-	void display(string sp, string sn, int v);
+	void display();
 	void addElement(T value);
 
   private:
 	mt19937 generator;
 	BstNode<T> *root;
 	void deleteTree(BstNode<T> *root);
-	void findSuccessor(BstNode<T> *node);
+	BstNode<T> *findSuccessor(BstNode<T> *node);
 	BstNode<T> *minimalNode();
 	//variables to print pretty the tree
 	void initializePrintVariables();
+	void displayRecurrence(string sp, string sn, BstNode<T> *&v);
 	string cr, cl, cp;
 };
 #endif

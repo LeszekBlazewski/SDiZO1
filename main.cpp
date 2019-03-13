@@ -6,6 +6,7 @@ using namespace std;
 #include "Array.cpp"
 #include "List.cpp"
 #include "Heap.cpp"
+#include "BstTree.cpp"
 
 void displayMenuStructure(string info)
 {
@@ -29,16 +30,15 @@ void displayMainMenu()
     cout << "1.Tablica" << endl;
     cout << "2.Lista" << endl;
     cout << "3.Kopiec" << endl;
-    cout << "4.Drzewo czerwono-czarne" << endl;
+    cout << "4.Drzewo BST" << endl;
     cout << "5.Przygotuj dane testowe" << endl;
     cout << "0.Wyjscie" << endl;
     cout << "Podaj opcje:";
 }
 
-void displayMenuArray(mt19937 generator, Array<int> *array)
+void displayMenuArray(Array<int> *array)
 {
     int userInput, index, resultOfOperation, elementValue, addOption;
-    array = new Array<int>(generator);
     do
     {
         displayMenuStructure("---- TABLICA ----");
@@ -129,10 +129,9 @@ void displayMenuArray(mt19937 generator, Array<int> *array)
     } while (userInput != 0);
 }
 
-void displayMenuList(mt19937 generator, List<int> *list)
+void displayMenuList(List<int> *list)
 {
     int userInput, index, elementValue, resultOfOperation;
-    list = new List<int>(generator);
     do
     {
         displayMenuStructure("---- LISTA ----");
@@ -201,10 +200,9 @@ void displayMenuList(mt19937 generator, List<int> *list)
     } while (userInput != 0);
 }
 
-void displayMenuHeap(mt19937 generator, Heap<int> *heap)
+void displayMenuHeap(Heap<int> *heap)
 {
     int userInput, elementValue, resultOfOperation;
-    heap = new Heap<int>(generator);
     do
     {
         displayMenuStructure("---- KOPIEC ----");
@@ -268,13 +266,79 @@ void displayMenuHeap(mt19937 generator, Heap<int> *heap)
     } while (userInput != 0);
 }
 
+void displayMenuTree(BstTree<int> *tree)
+{
+    int userInput, elementValue, resultOfOperation;
+    do
+    {
+        displayMenuStructure("---- DRZEWO BST ----");
+        cin >> userInput;
+        cout << endl;
+        switch (userInput)
+        {
+        case 1:
+        { //load tree from file
+            cout << "Podaj nazwe pliku: ";
+            string filename;
+            cin >> filename;
+            if (tree->loadFromFile(filename) == -1)
+                cout << "Wczytywanie nie powiodło się!" << endl;
+            else
+            {
+                cout << "Dane zostały wczytane\n\n";
+                tree->display();
+            }
+            break;
+        }
+        case 2: // remove element by given value
+            cout << "Podaj wartość do usunięcia:" << endl;
+            cin >> elementValue;
+            resultOfOperation = tree->deleteElement(elementValue);
+            if (resultOfOperation == -1)
+                cout << "Podana wartość nie występuje w kopcu !" << endl;
+            else
+                tree->display();
+            break;
+        case 3: // add element
+            cout << "Podaj wartość elementu, który należy dodać:";
+            cin >> elementValue;
+            tree->addElement(elementValue);
+            tree->display();
+            break;
+        case 4: //search tree for given element
+        {
+            cout << "Podaj wartość elementu, który należy wyszukać:";
+            cin >> elementValue;
+            BstNode<int> *node = tree->findNode(elementValue);
+            if (node)
+                cout << "Element znajduje się w kopcu." << endl;
+            else
+                cout << "Podany element nie występuje w kopcu." << endl;
+            break;
+        }
+        case 5: // generate random values and fill the tree
+            cout << "Podaj rozmiar drzewa:";
+            int size;
+            cin >> size;
+            tree->generateTree(size);
+            tree->display();
+            break;
+        case 6: //display the tree
+            tree->display();
+            break;
+        case 7: //funckja służąca do testowania.
+            break;
+        }
+    } while (userInput != 0);
+}
 int main()
 {
     random_device rd;
     mt19937 generator(rd());
-    Array<int> *array;
-    List<int> *list;
-    Heap<int> *heap;
+    Array<int> *array = new Array<int>(generator);
+    List<int> *list = new List<int>(generator);
+    Heap<int> *heap = new Heap<int>(generator);
+    BstTree<int> *tree = new BstTree<int>(generator);
     int option;
     do
     {
@@ -284,15 +348,16 @@ int main()
         switch (option)
         {
         case 1:
-            displayMenuArray(generator, array);
+            displayMenuArray(array);
             break;
         case 2:
-            displayMenuList(generator, list);
+            displayMenuList(list);
             break;
         case 3:
-            displayMenuHeap(generator, heap);
+            displayMenuHeap(heap);
             break;
         case 4:
+            displayMenuTree(tree);
             break;
         case 5:
             break;
