@@ -172,8 +172,9 @@ void Array<T>::display()
     }
     cout << endl;
 }
+
 template <typename T>
-void Array<T>::generateArray(int size, T minValue, T maxValue)
+void Array<T>::generateArray(int size, T maxValue, T minValue)
 {
     T *newArray = new T[size];
 

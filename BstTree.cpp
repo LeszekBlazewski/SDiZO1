@@ -51,7 +51,7 @@ int BstTree<T>::loadFromFile(string filename)
 	int length;
 	T value;
 	deleteTree(root);
-	//root = nullptr;				CHECK IF THIS CAN BE SO
+	root = nullptr;
 	stream >> length;
 
 	for (int i = 0; i < length; i++) // read all values from file and insert them into newly created array

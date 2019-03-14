@@ -122,9 +122,9 @@ void displayMenuArray(Array<int> *array)
         }
         case 5: // generate random values and fill the table
             cout << "Podaj rozmiar tablicy:";
-            int size;
-            cin >> size;
-            array->generateArray(size);
+            int length;
+            cin >> length;
+            array->generateArray(length);
             array->display();
             break;
         case 6: //display the table
@@ -147,7 +147,7 @@ void displayMenuList(List<int> *list)
         switch (userInput)
         {
         case 1:
-        { //load list from file
+        { // load list from file
             cout << "Podaj nazwe pliku: ";
             string filename;
             cin >> filename;
@@ -180,7 +180,7 @@ void displayMenuList(List<int> *list)
             else
                 list->display();
             break;
-        case 4: //search list for given element
+        case 4: // search list for given element
         {
             cout << "Podaj wartość elementu, który należy wyszukać:";
             cin >> elementValue;

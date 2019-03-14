@@ -41,6 +41,8 @@ void List<T>::push_front(T value)
 {
     Node<T> *newNode = new Node<T>; //create new node for pointer
     newNode->data = value;          // assign value
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
 
     if (head == nullptr) //check if list is empty if so assign tail & head to the new pointer (head assigned at end)
         tail = newNode;
@@ -58,6 +60,8 @@ void List<T>::push_back(T value)
 {
     Node<T> *newNode = new Node<T>;
     newNode->data = value;
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
 
     if (head == nullptr) // if list is empty => head == tail so asign new node to head && to tail (end of function)
         head = newNode;

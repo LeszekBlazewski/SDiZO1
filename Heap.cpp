@@ -95,8 +95,8 @@ int Heap<T>::deleteElement(T value)
         int parent = (elementPosition - 1) / 2; // calucalte the position of parent
 
         heap[elementPosition] = heap[numberOfElementsInHeap - 1]; // replace the found element with the last element in heap
-
-        numberOfElementsInHeap -= 1; // decrease the number of elements
+        heap[numberOfElementsInHeap - 1] = 0;                     // set the moved element to zero which indicates that the field is empty
+        numberOfElementsInHeap -= 1;                              // decrease the number of elements
 
         if (elementPosition == 0 || heap[parent] > heap[elementPosition]) // if found element is root OR value at found position is less than it's parent we need to switch element only down from given
             heapifyDown(elementPosition);
@@ -122,7 +122,12 @@ void Heap<T>::displayRecurrence(string sMiddle, string sBefore, int currNode)
 
         s = s.substr(0, sMiddle.length() - 2);
 
-        cout << s << sBefore << heap[currNode] << endl;
+        cout << s << sBefore;
+        if (heap[currNode] != 0)
+            cout << heap[currNode];
+        else
+            cout << 'x';
+        cout << endl;
 
         s = sMiddle;
         if (sBefore == (string(1, (char)92)) + string(1, (char)126))
