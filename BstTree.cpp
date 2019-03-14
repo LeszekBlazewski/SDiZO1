@@ -202,6 +202,11 @@ void BstTree<T>::display()
 	cout << endl;
 }
 
+/*
+	Display the tree in following way:
+	1. tree is displayed horizontally as if it was flipped left 
+	2. IF right node exists it is ALWAYS RENDERED FIRST otherwise left node is rendered and right node is not displayed !
+*/
 template <typename T>
 void BstTree<T>::displayRecurrence(BstNode<T> *root, string prefix)
 {
