@@ -318,7 +318,7 @@ void BstTree<T>::rebalanceDSW()
 		if (p->left) // if current processed not has left son
 		{
 			rotateRight(p); // rotate the tree right
-			p = p->up;		// move to the parent
+			p = p->up;		// move to the correct node aftere rotation
 		}
 		else
 		{
@@ -326,19 +326,19 @@ void BstTree<T>::rebalanceDSW()
 			p = p->right;  // and move to the right son
 		}
 
-	// Teraz z listy tworzymy drzewo BST
-	rotateCounter = nodesNumber + 1 - calculateLog2(nodesNumber + 1); // Wyznaczamy początkową liczbę obrotów
+	// now create balanced tree from linear list
+	rotateCounter = nodesNumber + 1 - calculateLog2(nodesNumber + 1); // calculate number of leafs
 
 	p = root; // Start from the root
 	for (int i = 0; i < rotateCounter; i++)
 	{
 		rotateLeft(p);	// every second node is rotated left
-		p = p->up->right; // move to the right son of parrent of current node
+		p = p->up->right; // move to the right son of parrent of current node ( every second node, get back up and then move down again)
 	}
 
 	nodesNumber = nodesNumber - rotateCounter; // Decrease the number of nodes by number of leafs
 
-	while (nodesNumber > 1) // keep rotating th tree
+	while (nodesNumber > 1) // keep rotating the tree
 	{
 		nodesNumber = nodesNumber >> 1; // with each iteration the number of nodes decreases by 2
 		p = root;						// start from the root
