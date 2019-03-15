@@ -33,10 +33,10 @@ class BstTree
 	BstNode<T> *root;
 	void deleteTree(BstNode<T> *root);
 	BstNode<T> *findSuccessor(BstNode<T> *node);
-	BstNode<T> *minimalNode();
+	BstNode<T> *minimalNode(BstNode<T> *node);
 	void rotateRight(BstNode<T> *node);
 	void rotateLeft(BstNode<T> *node);
-	void displayRecurrence(BstNode<T> *tp, string prefix);
+	void displayRecurrence(BstNode<T> *tp, int indent);
 	unsigned calculateLog2(unsigned number);
 };
 #endif

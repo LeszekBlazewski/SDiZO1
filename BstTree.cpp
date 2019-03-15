@@ -73,15 +73,13 @@ BstNode<T> *BstTree<T>::findNode(T element)
 	return ptr; // return found pointer or nullptr if it does not exists
 }
 template <typename T>
-BstNode<T> *BstTree<T>::minimalNode()
+BstNode<T> *BstTree<T>::minimalNode(BstNode<T> *node)
 {
-	BstNode<T> *tmp = root; // tmp pointer to not mess up the link in the tree
+	if (node != nullptr)	   // if provided node exists
+		while (node->left)	 // while left son exits
+			node = node->left; // move to the left son
 
-	if (tmp != nullptr)		 // check if tree contains any elements
-		while (tmp->left)	// if yes keep iterating left until the last node
-			tmp = tmp->left; // move left
-
-	return tmp; // return found pointer OR nullptr if tree is empty
+	return node; // return found pointer OR nullptr if tree is empty
 }
 
 template <typename T>
@@ -91,8 +89,8 @@ BstNode<T> *BstTree<T>::findSuccessor(BstNode<T> *node)
 
 	if (node != nullptr) // if given node exists
 	{
-		if (node->right)		  // if right son of the given node exists
-			return minimalNode(); // search the minimal node
+		if (node->right)					 // if right son of the given node exists
+			return minimalNode(node->right); // search the minimal node
 		else
 		{
 			successor = node->up;							// successors becomes the parent of the node
@@ -197,8 +195,7 @@ void BstTree<T>::display()
 	if (root == NULL)
 		return;
 
-	cout << root->key << endl;
-	displayRecurrence(root, "");
+	displayRecurrence(root, 10);
 	cout << endl;
 }
 
@@ -208,33 +205,15 @@ void BstTree<T>::display()
 	2. IF right node exists it is ALWAYS RENDERED FIRST otherwise left node is rendered and right node is not displayed !
 */
 template <typename T>
-void BstTree<T>::displayRecurrence(BstNode<T> *root, string prefix)
+void BstTree<T>::displayRecurrence(BstNode<T> *current, int indent)
 {
-	if (root == NULL)
-		return;
-
-	bool hasLeft = (root->left != NULL);
-	bool hasRight = (root->right != NULL);
-
-	if (!hasLeft && !hasRight)
-		return;
-
-	cout << prefix;
-	cout << ((hasLeft && hasRight) ? "├── " : "");
-	cout << ((!hasLeft && hasRight) ? "└── " : "");
-
-	if (hasRight)
+	if (current != nullptr)
 	{
-		bool printStrand = (hasLeft && hasRight && (root->right->right != NULL || root->right->left != NULL));
-		string newPrefix = prefix + (printStrand ? "│   " : "    ");
-		cout << root->right->key << endl;
-		displayRecurrence(root->right, newPrefix);
-	}
-
-	if (hasLeft)
-	{
-		cout << (hasRight ? prefix : "") << "└── " << root->left->key << endl;
-		displayRecurrence(root->left, prefix + "    ");
+		displayRecurrence(current->left, indent + 4);
+		if (indent > 0)
+			cout << setw(indent) << " ";
+		cout << current->key << endl;
+		displayRecurrence(current->right, indent + 4);
 	}
 }
 

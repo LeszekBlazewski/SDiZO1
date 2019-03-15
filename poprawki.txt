@@ -1,0 +1,10 @@
+kopiec do sprawdzenia 
+
+za dużo elementów
+
+usuwanie przy kopcu żeby się element usuwany kasował - DZIAŁA (BYŁY 2 SIÓDEMKI !)
+
+usuwanie drzewa bst - naprawić ! ( Wysuzkiwać minimalny w PODRZEWIE A NIE W CAŁYM DRZEWIE JAK MA PRAWEGO SYNA)
+
+równoważenie sprawdzić - wygląda ok 
+

@@ -125,8 +125,8 @@ void Heap<T>::displayRecurrence(string sMiddle, string sBefore, int currNode)
         cout << s << sBefore;
         if (heap[currNode] != 0)
             cout << heap[currNode];
-        else
-            cout << 'x';
+        //else
+        //cout << 'x';
         cout << endl;
 
         s = sMiddle;

@@ -318,9 +318,9 @@ void displayMenuTree(BstTree<int> *tree)
             cin >> elementValue;
             BstNode<int> *node = tree->findNode(elementValue);
             if (node)
-                cout << "Element znajduje się w kopcu." << endl;
+                cout << "Element znajduje się w drzewie." << endl;
             else
-                cout << "Podany element nie występuje w kopcu." << endl;
+                cout << "Podany element nie występuje w drzewie." << endl;
             break;
         }
         case 5: // generate random values and fill the tree
