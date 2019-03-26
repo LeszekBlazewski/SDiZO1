@@ -16,6 +16,7 @@ public:
   void generateHeap(int size, T minValue = 1, T maxValue = 1000);
   int findElementPosition(T element);
   int deleteElement(T value);
+  void heap_pop();
   void displayRecurrence(string sMiddle, string sBefore, int currNode);
   void display();
   void heapifyDown(int position);

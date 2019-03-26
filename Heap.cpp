@@ -216,3 +216,30 @@ void Heap<T>::heapifyDown(int position)
         }
     }
 }
+
+template <typename T>
+void Heap<T>::heap_pop()
+{
+    int i, j, v;
+
+    if (n--)
+    {
+        v = heap[n];
+
+        i = 0;
+        j = 1;
+
+        while (j < n)
+        {
+            if (j + 1 < n && heap[j + 1] > heap[j])
+                j++;
+            if (v >= heap[j])
+                break;
+            heap[i] = heap[j];
+            i = j;
+            j = 2 * j + 1;
+        }
+
+        heap[i] = v;
+    }
+}

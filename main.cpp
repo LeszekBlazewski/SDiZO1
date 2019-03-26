@@ -166,22 +166,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                            array->addElement(i, dis(gen));
+                            array->addElementBack(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -202,22 +194,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
                             array->addElement(i / 2, dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -238,22 +222,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                            array->addElement(0, dis(gen));
+                            array->addElementFront(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -274,22 +250,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
                             array->isElementInArray(-1);
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -309,23 +277,14 @@ void displayMenuArray(Array<int> *array)
                     for (int k = 0; k < dataRangesCount; k++)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
-                        array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                            array->deleteElement(i - 1);
+                            array->deleteElementBack();
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -346,22 +305,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
                             array->deleteElement(i / 2);
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -382,22 +333,14 @@ void displayMenuArray(Array<int> *array)
                     {
                         uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
                         array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        auto fillStartTime = chrono::high_resolution_clock::now();
-                        for (int j = 0; j < testPrecision; j++)
-                        {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                        }
-                        auto fillEndTime = chrono::high_resolution_clock::now();
-                        auto fillTime = chrono::duration_cast<chrono::nanoseconds>(fillEndTime - fillStartTime).count();
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            array->generateArray(i, dataRanges[k * 2 + 1], dataRanges[k * 2]);
-                            array->deleteElement(0);
+                            array->deleteElementFront();
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() - fillTime) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -511,8 +454,8 @@ void displayMenuList(List<int> *list)
                             list->pop_front();
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 60;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 60;
+                        testOutput << "\t" << timeResult;
                     }
 
                     testOutput << endl;
@@ -541,8 +484,8 @@ void displayMenuList(List<int> *list)
                             list->pop_front();
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 60;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 60;
+                        testOutput << "\t" << timeResult;
                     }
 
                     testOutput << endl;
@@ -570,8 +513,8 @@ void displayMenuList(List<int> *list)
                             list->push_front(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -598,8 +541,8 @@ void displayMenuList(List<int> *list)
                             list->findElement(-1);
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -627,8 +570,8 @@ void displayMenuList(List<int> *list)
                             list->push_front(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -656,8 +599,8 @@ void displayMenuList(List<int> *list)
                             list->push_front(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -685,8 +628,8 @@ void displayMenuList(List<int> *list)
                             list->push_front(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 140;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -792,11 +735,11 @@ void displayMenuHeap(Heap<int> *heap)
                         for (int j = 0; j < testPrecision; j++)
                         {
                             heap->addElement(dis(gen));
-                            heap->deleteElementByPos(i);
+                            //heap->deleteElementByPos(i);
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 50;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision);
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -823,14 +766,14 @@ void displayMenuHeap(Heap<int> *heap)
                             heap->findElementPosition(-1);
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
             }
-            cout << "DONE!\nUsuwanie z początku...";
-            testOutput << "Usuwanie z początku:\n";
+            cout << "DONE!\nUsuwanie...";
+            testOutput << "Usuwanie:\n";
             {
                 testOutput << "wielkosc struktury\t[10,100]\t[~INT_MAX/2]\t[~INT_MAX]\t[1,INT_MAX]\n";
                 for (int i = minElements; i <= maxD; i *= 2)
@@ -848,12 +791,12 @@ void displayMenuHeap(Heap<int> *heap)
                         auto startTime = chrono::high_resolution_clock::now();
                         for (int j = 0; j < testPrecision; j++)
                         {
-                            heap->deleteElementByPos(0);
-                            heap->addElement(dis(gen));
+                            heap->heap_pop();
+                            //heap->addElement(dis(gen));
                         }
                         auto endTime = chrono::high_resolution_clock::now();
-                        auto sumaCzasow = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision) - 90;
-                        testOutput << "\t" << sumaCzasow;
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision);
+                        testOutput << "\t" << timeResult;
                     }
                     testOutput << endl;
                 }
@@ -862,7 +805,6 @@ void displayMenuHeap(Heap<int> *heap)
             testOutput.close();
             break;
         }
-        break;
         }
     } while (userInput != 0);
 }
@@ -932,7 +874,111 @@ void displayMenuTree(BstTree<int> *tree)
             tree->display();
             break;
         case 8: // test function
+        {
+            const int dataRanges[8] = {10, 100, INT_MAX / 2 - 100000000, INT_MAX / 2 + 100000000, INT_MAX - 200000000, INT_MAX, 1, INT_MAX};
+            const int dataRangesCount = 4;
+            const int minElements = 16;
+            const int minTestPrecision = 10;
+            const int baseTestPrecision = 2500000;
+            ofstream testOutput("BstTree.txt");
+            if (!testOutput)
+            {
+                cout << "BLAD zapisu testow!";
+            }
+            testOutput << "CZASY  OPERACJI W NANOSEKUNDACH\n";
+            cout << "Wstawianie...";
+            testOutput << "Wstawianie:\n";
+            {
+                testOutput << "wielkosc struktury\t[10,100]\t[~INT_MAX/2]\t[~INT_MAX]\t[1,INT_MAX]\n";
+                for (int i = minElements; i <= maxD; i *= 2)
+                {
+                    testOutput << i << "\t";
+                    int testPrecision = baseTestPrecision;
+                    if (testPrecision < minTestPrecision)
+                    {
+                        testPrecision = minTestPrecision;
+                    }
+                    for (int k = 0; k < dataRangesCount; k++)
+                    {
+                        uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->generateTree(i, dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->rebalanceDSW();
+                        auto startTime = chrono::high_resolution_clock::now();
+                        for (int j = 0; j < testPrecision; j++)
+                        {
+                            tree->addElement(dis(gen));
+                            tree->rebalanceDSW();
+                        }
+                        auto endTime = chrono::high_resolution_clock::now();
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision);
+                        testOutput << "\t" << timeResult;
+                    }
+                    testOutput << endl;
+                }
+            }
+            cout << "DONE!\nWyszukiwanie - klucz poza przedziałem...";
+            testOutput << "Wyszukiwanie - klucz poza przedziałem:\n";
+            {
+                testOutput << "wielkosc struktury\t[10,100]\t[~INT_MAX/2]\t[~INT_MAX]\t[1,INT_MAX]\n";
+                for (int i = minElements; i <= maxD; i *= 2)
+                {
+                    testOutput << i << "\t";
+                    int testPrecision = (baseTestPrecision * 20) / i;
+                    if (testPrecision < minTestPrecision)
+                    {
+                        testPrecision = minTestPrecision;
+                    }
+                    for (int k = 0; k < dataRangesCount; k++)
+                    {
+                        uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->generateTree(i, dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->rebalanceDSW();
+                        auto startTime = chrono::high_resolution_clock::now();
+                        for (int j = 0; j < testPrecision; j++)
+                        {
+                            tree->findNode(-1);
+                        }
+                        auto endTime = chrono::high_resolution_clock::now();
+                        auto timeResult = (chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision;
+                        testOutput << "\t" << timeResult;
+                    }
+                    testOutput << endl;
+                }
+            }
+            cout << "DONE!\nUsuwanie...";
+            testOutput << "Usuwanie:\n";
+            {
+                testOutput << "wielkosc struktury\t[10,100]\t[~INT_MAX/2]\t[~INT_MAX]\t[1,INT_MAX]\n";
+                for (int i = minElements; i <= maxD; i *= 2)
+                {
+                    testOutput << i << "\t";
+                    int testPrecision = baseTestPrecision;
+                    if (testPrecision < minTestPrecision)
+                    {
+                        testPrecision = minTestPrecision;
+                    }
+                    for (int k = 0; k < dataRangesCount; k++)
+                    {
+                        uniform_int_distribution<> dis(dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->generateTree(i, dataRanges[k * 2], dataRanges[k * 2 + 1]);
+                        tree->rebalanceDSW();
+                        auto startTime = chrono::high_resolution_clock::now();
+                        for (int j = 0; j < testPrecision; j++)
+                        {
+                            tree->deleteElement(dis(gen));
+                            tree->rebalanceDSW();
+                        }
+                        auto endTime = chrono::high_resolution_clock::now();
+                        auto timeResult = ((chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count()) / testPrecision);
+                        testOutput << "\t" << timeResult;
+                    }
+                    testOutput << endl;
+                }
+            }
+            cout << "DONE!\n";
+            testOutput.close();
             break;
+        }
         }
     } while (userInput != 0);
 }
@@ -945,6 +991,7 @@ int main()
     Heap<int> *heap = new Heap<int>(generator);
     BstTree<int> *tree = new BstTree<int>(generator);
     int option;
+
     do
     {
         displayMainMenu();
