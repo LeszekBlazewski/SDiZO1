@@ -222,16 +222,16 @@ void Heap<T>::heap_pop()
 {
     int i, j, v;
 
-    if (n--)
+    if (size--)
     {
-        v = heap[n];
+        v = heap[size];
 
         i = 0;
         j = 1;
 
-        while (j < n)
+        while (j < size)
         {
-            if (j + 1 < n && heap[j + 1] > heap[j])
+            if (j + 1 < size && heap[j + 1] > heap[j])
                 j++;
             if (v >= heap[j])
                 break;
