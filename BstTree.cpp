@@ -25,7 +25,7 @@ void BstTree<T>::deleteTree(BstNode<T> *root)
 	{
 		deleteTree(root->left); // recurension to delete properly the tree
 		deleteTree(root->right);
-		delete root;
+		delete root; // post order
 	}
 }
 
